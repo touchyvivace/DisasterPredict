@@ -8,7 +8,6 @@ using CsvHelper.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using DisasterPredict.Domain.Entities;
 
 namespace Infra.Persistence
 {
@@ -63,7 +62,7 @@ namespace Infra.Persistence
             try
             {
                 string seedFile = _config["SeedFile"].ToString() ?? string.Empty;
-                await SeedDataAsync<DisasterPredictInfo>(seedFile);
+                // await SeedDataAsync<DisasterPredictInfo>(seedFile);
             }
             catch (Exception ex)
             {
@@ -84,7 +83,6 @@ namespace Infra.Persistence
 
                     using var reader = new StreamReader(filePath);
                     using var csv = new CsvReader(reader, config);
-                    RegisterCsvClassMap(csv);
                     var records = csv.GetRecords<T>().ToList();
                     if (records.Any())
                     {
@@ -111,9 +109,5 @@ namespace Infra.Persistence
             }
         }
 
-        private static void RegisterCsvClassMap(CsvReader csv)
-        {
-            csv.Context.RegisterClassMap<DisasterPredictRecordMap>();
-        }
     }
 }

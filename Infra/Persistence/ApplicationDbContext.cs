@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.Options;
 using DisasterPredict.Core.Common.Interfaces;
-using DisasterPredict.Domain.Entities;
 using DisasterPredict.Infrastructure.Persistence.Interceptors;
+using Domain.Entities;
 
 namespace Infra.Persistence
 {
@@ -32,7 +32,7 @@ namespace Infra.Persistence
         }
     public IDbConnection Connection => Database.GetDbConnection();
 
-        public DbSet<DisasterPredictInfo> DisasterPredicts => Set<DisasterPredictInfo>();
+        public DbSet<Regions> Regions => Set<Regions>();
 
         public new DatabaseFacade Database => base.Database;
         protected override void OnModelCreating(ModelBuilder builder)
